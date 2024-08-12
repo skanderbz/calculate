@@ -7,13 +7,13 @@
 
 typedef struct 
 {
-    double nums[MAX_STACK_SIZE];
+    double nums[(int)MAX_STACK_SIZE];
     int top;
 } ValueStack ;
 
 typedef struct 
 {
-    char ops[MAX_STACK_SIZE];
+    char ops[(int)MAX_STACK_SIZE];
     int top;
 } OperationStack;
 
@@ -30,7 +30,7 @@ double peekVal(ValueStack *s);
 
 OperationStack* newOperationStack();
 bool opstackEmpty(OperationStack *s);
-bool valstackFull(OperationStack *s);
+bool opstackFull(OperationStack *s);
 double popOp(OperationStack *s);
 void pushOp(OperationStack *s, char item);
 double peekOp(OperationStack *s);
