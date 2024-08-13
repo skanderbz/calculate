@@ -31,9 +31,9 @@ double peekVal(ValueStack *s);
 OperationStack* newOperationStack();
 bool opstackEmpty(OperationStack *s);
 bool opstackFull(OperationStack *s);
-double popOp(OperationStack *s);
+char popOp(OperationStack *s);
 void pushOp(OperationStack *s, char item);
-double peekOp(OperationStack *s);
+char peekOp(OperationStack *s);
 
 
 // Yipee!

@@ -25,10 +25,12 @@ double popVal(ValueStack *s){
 
     double value = s->nums[s->top];
     s->top--;
+    return value;
 }
 
 void pushVal(ValueStack *s, double item){
     if (valstackFull(s)){
+        fprintf(stderr, "Stack overflow: cannot push onto a full stack\n");
         exit(EXIT_FAILURE);
     }
     s->top++;
@@ -44,6 +46,8 @@ double peekVal(ValueStack *s){
 
 OperationStack* newOperationStack(){
     OperationStack *newOP = (OperationStack*)malloc(sizeof(OperationStack));
+    newOP->top = -1;
+    return newOP;
 }
 
 bool opstackEmpty(OperationStack *s){
@@ -53,17 +57,19 @@ bool opstackFull(OperationStack *s){
     return (s->top == (int)MAX_STACK_SIZE - 1);
 }
 
-double popOp(OperationStack *s){
+char popOp(OperationStack *s){
     if (opstackEmpty(s)){
         exit(EXIT_FAILURE);
     }
     char item = s->ops[s->top];
     s->top--;
+    return item;
 }
 
 
 void pushOp(OperationStack *s, char item){
     if  (opstackFull(s)){
+            fprintf(stderr, "Stack overflow: cannot push onto a full stack\n");
             exit(EXIT_FAILURE);
         }
     s->top++;
@@ -71,6 +77,6 @@ void pushOp(OperationStack *s, char item){
 }
     
 
-double peekOp(OperationStack *s){
+char peekOp(OperationStack *s){
     return (s->ops[s->top]);
 }

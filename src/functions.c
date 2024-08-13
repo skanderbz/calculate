@@ -51,7 +51,7 @@ double parse(const char *equation){
     ValueStack *numStack = newValueStack();
     OperationStack *opStack = newOperationStack();
 
-    for(int i = 0; i < strlen(equation); i++){
+    for(size_t i = 0; i < strlen(equation); i++){
         if (isdigit(equation[i])){
             double num = 0; 
 
@@ -91,8 +91,8 @@ double parse(const char *equation){
         double operand1 = popVal(numStack);
         pushVal(numStack, applyOperator(operator, operand1, operand2));
     }
-    double final = popVal(numStack);
-    free(numStack); free(opStack);
-    return final;
 }
+double final = popVal(numStack);
+free(numStack); free(opStack); 
+return final;
 }
