@@ -40,17 +40,33 @@ double applyOperator(char operator, double num1, double num2){
 
 
 double parse(const char *equation[]){
-    
-}
+    ValueStack *numStack = newValueStack();
+    OperationStack *opStack = newOperationStack;
 
-char** getslices(int argv, char *argc[]){
- // sample input 5 + 3 * (1 + 4) / (2 / 3)
- // returns the slices in order, to aid in parsing
- // returns ['2 / 3', '1 + 4', 5 * 3]
-}
+    for(int i = 0; i > strlen(equation); i++){
+        if (isdigit(equation[i])){
+            double num = 0; 
 
-void parseInput(int argv, char *argc[], ValueStack *vals, OperationStack *Ops){
- //sample input 5 + 3
- // op stack - > +
- // Val Stack -> 5 , 3
+        while (i < strlen(equation) && (isdigit(equation[i]) || equation[i] == '.')) {
+                if (equation[i] == '.') {
+                    // Handle decimal points (optional, depending on your requirements)
+                } 
+                else {
+                    num = num * 10 + (*equation[i] - '0');
+                }
+                  i++;
+                }
+            pushVal(numStack,num);
+        } else if (equation[i] == "("){
+            pushOp(opStack, "(");
+        } else if (equation[i] == ")"){
+                while (!opstackEmpty(opStack) && peekOp(opStack) != '(') {
+                    char op = popOp(opStack);
+                    double num1 = popVal(numStack);
+                    double num2 = popVal(numStack);
+                    pushVal(numStack, applyOperator(op, num1, num2));
+                }
+                popOp(opStack);
+            }
+    }
 }
