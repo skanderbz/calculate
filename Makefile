@@ -1,16 +1,7 @@
-# Compiler
 CC = gcc
-
-# Compiler flags
 CFLAGS = -Wall -Wextra -std=c11
-
-# Target executable name
 TARGET = calculate
-
-# Source files
 SRCS = ./src/main.c ./src/stack.c ./src/functions.c
-
-# Object files (stored in ./bin with the same base names)
 OBJS = $(SRCS:./src/%.c=./bin/%.o)
 
 # Header files
