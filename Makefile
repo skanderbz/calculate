@@ -10,8 +10,8 @@ TARGET = calculate
 # Source files
 SRCS = ./src/main.c ./src/stack.c ./src/functions.c
 
-# Object files (same as source files but with .o extension)
-OBJS = $(SRCS:.c=.o)
+# Object files (stored in ./bin with the same base names)
+OBJS = $(SRCS:./src/%.c=./bin/%.o)
 
 # Header files
 HEADERS = ./include/stack.h ./include/functions.h
@@ -23,8 +23,9 @@ all: $(TARGET)
 $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
 
-# Compile source files into object files
-%.o: %.c $(HEADERS)
+# Compile source files into object files, stored in ./bin
+./bin/%.o: ./src/%.c $(HEADERS)
+	mkdir -p ./bin
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Clean up object files and the executable
